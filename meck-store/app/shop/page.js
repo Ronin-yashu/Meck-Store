@@ -1,10 +1,8 @@
 import React from 'react'
-import Proto2 from '@/components/Proto2';
+
 const page = () => {
   return (
-    <div>
-        <Proto2/>
-    </div>
+    <div>page</div>
   )
 }
 

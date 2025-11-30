@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { motion } from 'framer-motion';
 
-// Built-in cn utility function
+// Simple cn utility
 function cn(...classes) {
   return classes.filter(Boolean).join(' ');
 }
@@ -13,44 +13,35 @@ function ShimmeringText({
   transition,
   wave = false,
   className,
-  color = 'var(--color-neutral-500)',
-  shimmeringColor = 'var(--color-neutral-300)',
   ...props
 }) {
   return (
     <motion.span
-      className={cn('relative inline-block [perspective:500px]', className)}
-      style={{
-        '--shimmering-color': shimmeringColor,
-        '--color': color,
-        color: 'var(--color)'
-      }}
+      className={cn('relative inline-block', className)}
       {...props}
     >
       {text?.split('')?.map((char, i) => (
         <motion.span
           key={i}
-          className="inline-block whitespace-pre [transform-style:preserve-3d]"
-          initial={{
-            ...(wave
+          className="inline-block whitespace-pre"
+          initial={
+            wave
               ? {
                   scale: 1,
                   rotateY: 0,
                 }
-              : {}),
-            color: 'var(--color)',
-          }}
-          animate={{
-            ...(wave
+              : {}
+          }
+          animate={
+            wave
               ? {
                   x: [0, 5, 0],
                   y: [0, -5, 0],
                   scale: [1, 1.1, 1],
                   rotateY: [0, 15, 0],
                 }
-              : {}),
-            color: ['var(--color)', 'var(--shimmering-color)', 'var(--color)'],
-          }}
+              : {}
+          }
           transition={{
             duration,
             repeat: Infinity,
