@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { Box, Container, Flex, Text,Button } from "@radix-ui/themes";
+import { Box, Container, Flex, Text, Button } from "@radix-ui/themes";
 import { Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ScrollVelocity from "@/components/ui/shadcn-io/scroll-velocity";
@@ -14,7 +14,7 @@ const Hero = () => {
     return (
         <Box className="relative min-h-screen overflow-hidden">
             {/* Background scrolling text */}
-            <Box className="absolute inset-0 z-0 opacity-40 pointer-events-none flex items-center">
+            <Box className="absolute inset-0 z-0 opacity-20 pointer-events-none flex items-center">
                 <ScrollVelocity
                     texts={[
                         'The Amazing World of Shopping',
@@ -86,7 +86,7 @@ const Hero = () => {
                                 maxWidth: "600px",
                                 lineHeight: "1.6"
                             }}>
-                            Discover the best products at unbeatable prices. Shop now and experience the joy of finding exactly what you need!
+                            Discover amazing products with stunning visuals and unbeatable prices.
                             <br />
                             <span style={{
                                 background: "linear-gradient(90deg, #667eea, #764ba2)",
@@ -150,6 +150,39 @@ const Hero = () => {
                         </Flex>
                     </motion.div>
 
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1 }}
+                    >
+                        <Flex
+                            gap="8"
+                            wrap="wrap"
+                            justify="center"
+                            style={{
+                                marginTop: "20px",
+                                background: "var(--gray-a2)",
+                                borderRadius: "40px",
+                                padding: "16px 40px",
+                                border: "1px solid var(--gray-a5)"
+                            }}
+                        >
+                            <Flex direction="column" align="center" gap="1">
+                                <Text size="5" weight="bold">10K+</Text>
+                                <Text size="2" color="gray">Happy Customers</Text>
+                            </Flex>
+                            <Box style={{ width: "1px", background: "var(--gray-a5)", height: "40px" }} />
+                            <Flex direction="column" align="center" gap="1">
+                                <Text size="5" weight="bold">5000+</Text>
+                                <Text size="2" color="gray">Products</Text>
+                            </Flex>
+                            <Box style={{ width: "1px", background: "var(--gray-a5)", height: "40px" }} />
+                            <Flex direction="column" align="center" gap="1">
+                                <Text size="5" weight="bold">⭐ 4.9</Text>
+                                <Text size="2" color="gray">Rating</Text>
+                            </Flex>
+                        </Flex>
+                    </motion.div>
                 </Flex>
             </Container>
         </Box>
