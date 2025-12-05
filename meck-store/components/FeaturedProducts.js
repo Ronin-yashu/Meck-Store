@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import ProductCard from './ProductCard';
+import ProductCard2 from './ProductCard2';
 
 const FeaturedProducts = () => {
   const [products, setProducts] = useState([]);
@@ -71,7 +72,7 @@ const FeaturedProducts = () => {
       <Box style={{ padding: '80px 0', background: 'var(--gray-a2)' }}>
         <Container size="4">
           <Flex justify="center" align="center" style={{ minHeight: '400px' }}>
-            <Text size="5">No featured products found</Text>
+            <Text size="5">No products found</Text>
           </Flex>
         </Container>
       </Box>
@@ -130,6 +131,7 @@ const FeaturedProducts = () => {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >
+              {/* <ProductCard2 product={product} /> */}
               <ProductCard product={product} />
             </motion.div>
           ))}

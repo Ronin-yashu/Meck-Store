@@ -2,6 +2,7 @@ import "./globals.css";
 import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import Navbar from "@/components/Navbar";
+import LoadingProvider from "@/components/LoadingProvider";
 
 export const metadata = {
   title: "Meck Store - Your Shopping Destination",
@@ -13,8 +14,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Theme>
-          <Navbar />
-          {children}
+          <LoadingProvider>
+            <Navbar />
+            {children}
+          </LoadingProvider>
         </Theme>
       </body>
     </html>

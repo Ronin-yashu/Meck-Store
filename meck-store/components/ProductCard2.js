@@ -31,6 +31,17 @@ const ProductCard2 = ({ product }) => {
                 <Text size="2" color="gray">{product.reviewCount}</Text>
               </Flex>
 
+              <Flex align="center" gap="2">
+                <Text size="5" weight="bold" >₹{(product.price / 100).toLocaleString('en-IN')}</Text>
+                {product.comparePrice && (<Text size="3" color='gray' className='line-through'>₹{(product.comparePrice / 100).toLocaleString('en-IN')}</Text>)}
+              </Flex>
+              
+              {product.stock > 0 ? (<Text size="2" color='green'>In Stock</Text>):(<Text size="2" color='red'>Out of Stock</Text>)}
+
+              <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={(e) => {e.preventDefault();}}>
+                <ShoppingCart size={18} />
+                Add to Cart
+              </motion.button>
             </Flex>
           </Card>
         </motion.div>
