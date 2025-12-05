@@ -6,8 +6,6 @@ import { motion } from 'framer-motion';
 import ScrollVelocity from "@/components/ui/shadcn-io/scroll-velocity";
 import { ShimmeringText } from "@/components/ui/shadcn-io/shimmering-text";
 import Link from 'next/link';
-
-
 import { ShoppingBag, ArrowRight } from 'lucide-react';
 
 const Hero = () => {
@@ -35,7 +33,7 @@ const Hero = () => {
             >
                 <Flex direction="column" align="center" justify="center" gap="7" width="full">
                     {/* Badge */}
-                    <motion.div
+                    <motion.div 
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
@@ -68,7 +66,7 @@ const Hero = () => {
                             text="Welcome to Meck Store"
                             duration={2}
                             wave={true}
-                            className="font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-5xl text-center"
+                            className="font-extrabold text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-5xl text-center"
                             style={{
                                 color: "black", // or "var(--foreground)"
                             }}
@@ -150,12 +148,12 @@ const Hero = () => {
                         </Flex>
                     </motion.div>
 
-                    <motion.div
+                    <motion.div className='md:block hidden'
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1 }}
                     >
-                        <Flex
+                        <Flex 
                             gap="8"
                             wrap="wrap"
                             justify="center"
@@ -183,6 +181,7 @@ const Hero = () => {
                             </Flex>
                         </Flex>
                     </motion.div>
+
                 </Flex>
             </Container>
         </Box>

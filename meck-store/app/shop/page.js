@@ -1,9 +1,17 @@
-import React from 'react'
+import React from 'react';
+import { Box, Container, Text } from '@radix-ui/themes';
 
-const page = () => {
+export default function ShopPage() {
   return (
-    <div>page</div>
-  )
+    <Box style={{ padding: '100px 0' }}>
+      <Container size="4">
+        <Text size="8" weight="bold">
+          Shop Page - Coming Soon
+        </Text>
+        <Text size="4" color="gray" style={{ marginTop: '16px' }}>
+          This page will show all products with filters and search.
+        </Text>
+      </Container>
+    </Box>
+  );
 }
-
-export default page
