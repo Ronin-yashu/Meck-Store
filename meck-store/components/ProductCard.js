@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-const ProductCard2 = ({ product }) => {
+const ProductCard = ({ product }) => {
   const discount = product.comparePrice ? Math.round(((product.comparePrice - product.price) / product.comparePrice) * 100): 0;
   return (
     <div>
@@ -59,4 +59,4 @@ const ProductCard2 = ({ product }) => {
   )
 }
 
-export default ProductCard2
+export default ProductCard
