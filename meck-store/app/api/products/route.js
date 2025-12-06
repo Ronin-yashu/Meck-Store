@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import connectMongoDB from '@/lib/mongodb';
 import Product from '@/models/Product';
 
+export const revalidate = 60;
+
 export async function GET(request) {
   try {
     await connectMongoDB();
@@ -17,23 +19,27 @@ export async function GET(request) {
 
     const products = await Product.find(query)
       .sort({ createdAt: -1 })
-      .limit(limit);
+      .limit(limit)
+      .lean();
 
-    // Convert to plain objects
-    const plainProducts = products.map(product => {
-      const obj = product.toObject();
-      return {
-        ...obj,
-        _id: obj._id.toString(),
-        specifications: obj.specifications ? Object.fromEntries(obj.specifications) : {}
-      };
-    });
+    const plainProducts = products.map(product => ({
+      ...product,
+      _id: product._id.toString(),
+      specifications: product.specifications || {} // Changed this line
+    }));
 
-    return NextResponse.json({
-      success: true,
-      count: plainProducts.length,
-      products: plainProducts
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        count: plainProducts.length,
+        products: plainProducts
+      },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=120'
+        }
+      }
+    );
 
   } catch (error) {
     console.error('Error fetching products:', error);

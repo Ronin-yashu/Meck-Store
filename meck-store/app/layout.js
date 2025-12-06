@@ -2,6 +2,7 @@ import "./globals.css";
 import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import LoadingProvider from "@/components/LoadingProvider";
 
 export const metadata = {
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
           <LoadingProvider>
             <Navbar />
             {children}
+            <Footer />
           </LoadingProvider>
         </Theme>
       </body>
