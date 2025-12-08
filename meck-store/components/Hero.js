@@ -10,9 +10,17 @@ import { ShoppingBag, ArrowRight } from 'lucide-react';
 
 const Hero = () => {
     return (
-        <Box className="relative min-h-screen overflow-hidden">
+        <Box style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden', paddingTop: '70px' }}>
             {/* Background scrolling text */}
-            <Box className="absolute inset-0 z-0 opacity-20 pointer-events-none flex items-center">
+            <Box style={{
+                position: 'absolute',
+                inset: 0,
+                zIndex: 0,
+                opacity: 0.2,
+                pointerEvents: 'none',
+                display: 'flex',
+                alignItems: 'center'
+            }}>
                 <ScrollVelocity
                     texts={[
                         'The Amazing World of Shopping',
@@ -29,9 +37,16 @@ const Hero = () => {
             {/* Foreground content */}
             <Container
                 size="4"
-                className="relative z-10 flex justify-center items-center h-[80vh]"
+                style={{
+                    position: 'relative',
+                    zIndex: 10,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    minHeight: 'calc(100vh - 70px)'
+                }}
             >
-                <Flex direction="column" align="center" justify="center" gap="7" width="full">
+                <Flex direction="column" align="center" justify="center" gap="7" style={{ width: '100%' }}>
                     {/* Badge */}
                     <motion.div 
                         initial={{ opacity: 0, y: 20 }}
@@ -67,17 +82,14 @@ const Hero = () => {
                             duration={2}
                             wave={true}
                             className="font-extrabold text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-5xl text-center"
-                            style={{
-                                color: "black", // or "var(--foreground)"
-                            }}
+                            style={{ color: "black" }}
                         />
                     </motion.div>
 
-                    <motion.div className='text-center'
+                    <motion.div style={{ textAlign: 'center' }}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.6 }}>
-
                         <Text size="5"
                             style={{
                                 color: "var(--gray-11)",
@@ -125,7 +137,7 @@ const Hero = () => {
                                     </Button>
                                 </motion.div>
                             </Link>
-                            <Link href="/categories">
+                            <Link href="/shop">
                                 <motion.div
                                     whileHover={{ scale: 1.05, y: -3 }}
                                     whileTap={{ scale: 0.95 }}
@@ -148,7 +160,7 @@ const Hero = () => {
                         </Flex>
                     </motion.div>
 
-                    <motion.div className='md:block hidden'
+                    <motion.div style={{ display: 'none' }} className="stats-desktop"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1 }}
@@ -181,9 +193,16 @@ const Hero = () => {
                             </Flex>
                         </Flex>
                     </motion.div>
-
                 </Flex>
             </Container>
+
+            <style jsx global>{`
+                @media (min-width: 768px) {
+                    .stats-desktop {
+                        display: block !important;
+                    }
+                }
+            `}</style>
         </Box>
     )
 }
