@@ -2,14 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // Helper to load cart from localStorage
 const loadCartFromStorage = () => {
-  if (typeof window === 'undefined') return { items: [], total: 0 };
+  if (typeof window === 'undefined') return { items: [], subtotal: 0, tax: 0, shipping: 0, total: 0 };
   
   try {
     const savedCart = localStorage.getItem('cart');
-    return savedCart ? JSON.parse(savedCart) : { items: [], total: 0 };
+    return savedCart ? JSON.parse(savedCart) : { items: [], subtotal: 0, tax: 0, shipping: 0, total: 0 };
   } catch (error) {
     console.error('Error loading cart:', error);
-    return { items: [], total: 0 };
+    return { items: [], subtotal: 0, tax: 0, shipping: 0, total: 0 };
   }
 };
 
@@ -137,5 +137,7 @@ export const selectCartItemCount = (state) =>
 export const selectCartSubtotal = (state) => state.cart.subtotal;
 export const selectCartTax = (state) => state.cart.tax;
 export const selectCartShipping = (state) => state.cart.shipping;
+export const selectIsInCart = (productId) => (state) =>
+  state.cart.items.some(item => item._id === productId);
 
 export default cartSlice.reducer;

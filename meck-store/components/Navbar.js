@@ -1,13 +1,19 @@
 "use client";
 import React from 'react';
-import { Box, Container, Flex, Text, Button, TextField } from "@radix-ui/themes";
+import { Box, Container, Flex, Text, Button, TextField, Badge } from "@radix-ui/themes";
 import { Search, ShoppingCart, User, Menu, X, Heart } from 'lucide-react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useSelector } from 'react-redux';
+import { selectCartItemCount } from '@/store/slices/cartSlice';
+import { selectWishlistCount } from '@/store/slices/wishlistSlice';
 
 const Navbar = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
     const [searchOn, setSearchOn] = React.useState(false);
+    
+    const cartItemCount = useSelector(selectCartItemCount);
+    const wishlistCount = useSelector(selectWishlistCount);
 
     // Close search with Escape key
     React.useEffect(() => {
@@ -75,7 +81,7 @@ const Navbar = () => {
 
                     {/* Desktop Menu */}
                     <Flex align="center" gap="6" style={{ display: 'none' }} className="desktop-menu">
-                        {/* Search Field with Animation */}
+                        {/* Search Field */}
                         <AnimatePresence>
                             {searchOn && (
                                 <motion.div
@@ -100,7 +106,7 @@ const Navbar = () => {
                             )}
                         </AnimatePresence>
 
-                        {/* Search Toggle Button */}
+                        {/* Search Toggle */}
                         <motion.div
                             whileHover={{ scale: 1.15 }}
                             whileTap={{ scale: 0.9 }}
@@ -119,7 +125,7 @@ const Navbar = () => {
                             )}
                         </motion.div>
 
-                        {/* Account Link */}
+                        {/* Account */}
                         <Link href="/account" style={{ textDecoration: 'none', color: 'inherit' }}>
                             <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.2 }}>
                                 <Text size="3" weight="medium" style={{ cursor: 'pointer' }}>
@@ -128,23 +134,73 @@ const Navbar = () => {
                             </motion.div>
                         </Link>
 
-                        {/* Wishlist Link */}
-                        <Link href="/wishlist" style={{ textDecoration: 'none', color: 'inherit' }}>
-                            <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.2 }}>
-                                <Text size="3" weight="medium" style={{ cursor: 'pointer' }}>
-                                    Wishlist
-                                </Text>
-                            </motion.div>
-                        </Link>
-
-                        {/* Cart Icon */}
-                        <Link href="/cart" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        {/* Wishlist with Count */}
+                        <Link href="/wishlist" style={{ textDecoration: 'none', color: 'inherit', position: 'relative' }}>
                             <motion.div
                                 whileHover={{ scale: 1.15, y: -2 }}
                                 whileTap={{ scale: 0.9 }}
                                 transition={{ duration: 0.2 }}
+                                style={{ position: 'relative' }}
+                            >
+                                <Heart style={{ cursor: 'pointer' }} />
+                                {wishlistCount > 0 && (
+                                    <motion.div
+                                        initial={{ scale: 0 }}
+                                        animate={{ scale: 1 }}
+                                        style={{
+                                            position: 'absolute',
+                                            top: '-8px',
+                                            right: '-8px',
+                                            background: '#ef4444',
+                                            color: 'white',
+                                            borderRadius: '50%',
+                                            width: '18px',
+                                            height: '18px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '11px',
+                                            fontWeight: 'bold'
+                                        }}
+                                    >
+                                        {wishlistCount}
+                                    </motion.div>
+                                )}
+                            </motion.div>
+                        </Link>
+
+                        {/* Cart with Count */}
+                        <Link href="/cart" style={{ textDecoration: 'none', color: 'inherit', position: 'relative' }}>
+                            <motion.div
+                                whileHover={{ scale: 1.15, y: -2 }}
+                                whileTap={{ scale: 0.9 }}
+                                transition={{ duration: 0.2 }}
+                                style={{ position: 'relative' }}
                             >
                                 <ShoppingCart style={{ cursor: 'pointer' }} />
+                                {cartItemCount > 0 && (
+                                    <motion.div
+                                        initial={{ scale: 0 }}
+                                        animate={{ scale: 1 }}
+                                        style={{
+                                            position: 'absolute',
+                                            top: '-8px',
+                                            right: '-8px',
+                                            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                            color: 'white',
+                                            borderRadius: '50%',
+                                            width: '18px',
+                                            height: '18px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '11px',
+                                            fontWeight: 'bold'
+                                        }}
+                                    >
+                                        {cartItemCount}
+                                    </motion.div>
+                                )}
                             </motion.div>
                         </Link>
 
@@ -248,6 +304,9 @@ const Navbar = () => {
                                                 <Flex align="center" gap="2">
                                                     <Heart size={18} />
                                                     <Text size="3" weight="medium">Wishlist</Text>
+                                                    {wishlistCount > 0 && (
+                                                        <Badge color="red">{wishlistCount}</Badge>
+                                                    )}
                                                 </Flex>
                                             </motion.div>
                                         </Link>
@@ -260,6 +319,9 @@ const Navbar = () => {
                                                 <Flex align="center" gap="2">
                                                     <ShoppingCart size={18} />
                                                     <Text size="3" weight="medium">Cart</Text>
+                                                    {cartItemCount > 0 && (
+                                                        <Badge>{cartItemCount}</Badge>
+                                                    )}
                                                 </Flex>
                                             </motion.div>
                                         </Link>
